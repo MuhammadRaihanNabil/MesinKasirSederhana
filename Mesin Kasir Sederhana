@@ -1,0 +1,66 @@
+#include <stdio.h>
+
+int main()
+{
+    int item;
+    float diskon, totalHarga = 0, totalSetelahDiskon = 0;
+    char cobaLagi;
+
+    do
+    {
+        printf("=====================================\n");
+        printf("    MESIN KASIR UD.SUMBER REJEKI   \n");
+        printf("=====================================\n");
+        printf("Berapa item yang bisa diinput? ");
+        scanf("%d", &item);
+
+        char namaBarang[item][50];
+        int jumlah[item];
+        float harga[item];
+
+        for (int i = 0; i < item; i++)
+        {
+            printf("Nama Barang ke-%d: ", i + 1);
+            scanf("%s", namaBarang[i]);
+            printf("Harga Barang ke-%d: ", i + 1);
+            scanf("%f", &harga[i]);
+            printf("Jumlah Barang ke-%d: ", i + 1);
+            scanf("%d", &jumlah[i]);
+            printf("\n");
+        }
+
+        printf("Masukkan diskon (dalam persen, tanpa simbol %%): ");
+        scanf("%f", &diskon);
+
+        printf("=====================================\n");
+        printf("            STRUK BELANJA            \n");
+        printf("=====================================\n");
+        printf("No   Nama Barang   Jumlah   Harga           Subtotal\n");
+        for (int i = 0; i < item; i++)
+        {
+            float subtotal = harga[i] * jumlah[i];
+            printf("%d    %-12s  %-7d  Rp. %.0f     Rp. %.0f\n", i + 1, namaBarang[i], jumlah[i], harga[i], subtotal);
+            totalHarga += subtotal;
+        }
+
+        float jumlahDiskon = (diskon / 100) * totalHarga;
+        totalSetelahDiskon = totalHarga - jumlahDiskon;
+
+        printf("=====================================\n");
+        printf("Total Harga Sebelum Diskon: Rp. %.0f\n", totalHarga);
+        printf("Diskon: %.0f%% (Rp. %.0f)\n", diskon, jumlahDiskon);
+        printf("Total Harga Setelah Diskon: Rp. %.0f\n", totalSetelahDiskon);
+        printf("=====================================\n");
+
+        printf("Apakah Anda ingin mencoba kembali? (y/n): ");
+        scanf(" %c", &cobaLagi);
+
+        totalHarga = 0;
+        totalSetelahDiskon = 0;
+
+    } while (cobaLagi == 'y' || cobaLagi == 'Y');
+
+    printf("Terima kasih telah menggunakan MESIN KASIR UD.SUMBER REJEKI ;3n");
+
+    return 0;
+}
